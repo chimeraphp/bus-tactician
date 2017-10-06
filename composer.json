@@ -1,0 +1,48 @@
+{
+    "name": "lcobucci/chimera-bus-tactician",
+    "description": "Tactician implementation connecting lcobucci/chimera-foundation and lcobucci/chimera-routing",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Luís Cobucci",
+            "email": "lcobucci@gmail.com"
+        }
+    ],
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.1",
+        "lcobucci/chimera-foundation": "1.0.x-dev@dev",
+        "lcobucci/chimera-routing": "1.0.x-dev@dev",
+        "league/tactician": "^1.0"
+    },
+    "require-dev": {
+        "league/tactician-container": "^2.0",
+        "phpstan/phpstan": "^0.8",
+        "phpunit/phpunit": "^6.3",
+        "squizlabs/php_codesniffer": "^3.1",
+        "symfony/dependency-injection": "^3.3"
+    },
+    "suggests": {
+        "league/tactician-container": "In order to use any PSR-11 compatible library to load handlers",
+        "symfony/dependency-injection": "In order to use the provided compiler passes"
+    },
+    "autoload": {
+        "psr-4": {
+            "Lcobucci\\Chimera\\Bus\\Tactician\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Lcobucci\\Chimera\\Bus\\Tactician\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0.x-dev"
+        }
+    }
+}
