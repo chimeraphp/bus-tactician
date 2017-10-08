@@ -26,7 +26,7 @@
         "squizlabs/php_codesniffer": "^3.1",
         "symfony/dependency-injection": "^3.3"
     },
-    "suggests": {
+    "suggest": {
         "league/tactician-container": "In order to use any PSR-11 compatible library to load handlers",
         "symfony/dependency-injection": "In order to use the provided compiler passes"
     },
