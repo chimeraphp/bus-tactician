@@ -15,8 +15,8 @@
     },
     "require": {
         "php": "^7.1",
-        "lcobucci/chimera-foundation": "1.0.x-dev@dev",
-        "lcobucci/chimera-routing": "1.0.x-dev@dev",
+        "lcobucci/chimera-foundation": "1.0.0-alpha1@alpha",
+        "lcobucci/chimera-routing": "1.0.0-alpha1@alpha",
         "league/tactician": "^1.0"
     },
     "require-dev": {
