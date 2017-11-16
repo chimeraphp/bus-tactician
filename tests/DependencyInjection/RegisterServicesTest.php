@@ -43,14 +43,16 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      *
+     * @dataProvider handlerTags
+     *
      * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
      */
-    public function processShouldThrowAnExceptionIfAHandlerIsNotTaggedToHandleSomething(): void
+    public function processShouldThrowAnExceptionIfAHandlerIsNotTaggedToHandleSomething(string $tag): void
     {
         $this->expectException(\InvalidArgumentException::class);
 
         $handler = new Definition();
-        $handler->addTag(Tags::HANDLER, ['bus' => self::COMMAND_BUS]);
+        $handler->addTag($tag, ['bus' => self::COMMAND_BUS]);
 
         $this->processCompilerPass(
             self::COMMAND_BUS,
@@ -58,6 +60,15 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
             [],
             ['handler' => $handler]
         );
+    }
+
+    public function handlerTags(): array
+    {
+        return [
+            'bus handler'     => [Tags::HANDLER],
+            'query handler'   => [Tags::QUERY_HANDLER],
+            'command handler' => [Tags::COMMAND_HANDLER],
+        ];
     }
 
     /**
@@ -81,13 +92,22 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
     /**
      * @test
      *
+     * @dataProvider possibleHandlerTags
+     *
      * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
      */
-    public function processShouldCreateCommandAndQueryBusesWhichAreConnectedToTheTaggedHandlers(): void
-    {
+    public function processShouldCreateCommandAndQueryBusesWhichAreConnectedToTheTaggedHandlers(
+        array $tags,
+        array $expectedCommandHandlers,
+        array $expectedQueryHandlers
+    ): void {
         $handler = new Definition();
-        $handler->addTag(Tags::HANDLER, ['bus' => self::COMMAND_BUS, 'handles' => FetchById::class]);
-        $handler->addTag(Tags::HANDLER, ['bus' => self::QUERY_BUS, 'handles' => FetchById::class]);
+
+        foreach ($tags as $tag) {
+            [$name, $attributes] = $tag;
+
+            $handler->addTag($name, $attributes);
+        }
 
         $container = $this->processCompilerPass(
             self::COMMAND_BUS,
@@ -96,8 +116,50 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
             ['handler' => $handler]
         );
 
-        $this->assertSameHandlers($container, self::COMMAND_BUS, [FetchById::class => 'handler']);
-        $this->assertSameHandlers($container, self::QUERY_BUS, [FetchById::class => 'handler']);
+        $this->assertSameHandlers($container, self::COMMAND_BUS, $expectedCommandHandlers);
+        $this->assertSameHandlers($container, self::QUERY_BUS, $expectedQueryHandlers);
+    }
+
+    public function possibleHandlerTags(): array
+    {
+        return [
+            'commands only'                   => [
+                [[Tags::HANDLER, ['bus' => self::COMMAND_BUS, 'handles' => FetchById::class]]],
+                [FetchById::class => 'handler'],
+                [],
+            ],
+            'queries only'                    => [
+                [[Tags::HANDLER, ['bus' => self::QUERY_BUS, 'handles' => FetchById::class]]],
+                [],
+                [FetchById::class => 'handler'],
+            ],
+            'both'                            => [
+                [
+                    [Tags::HANDLER, ['bus' => self::COMMAND_BUS, 'handles' => FetchById::class]],
+                    [Tags::HANDLER, ['bus' => self::QUERY_BUS, 'handles' => FetchById::class]],
+                ],
+                [FetchById::class => 'handler'],
+                [FetchById::class => 'handler'],
+            ],
+            'commands only (default handler)' => [
+                [[Tags::COMMAND_HANDLER, ['handles' => FetchById::class]]],
+                [FetchById::class => 'handler'],
+                [],
+            ],
+            'queries only (default handler)'  => [
+                [[Tags::QUERY_HANDLER, ['handles' => FetchById::class]]],
+                [],
+                [FetchById::class => 'handler'],
+            ],
+            'both (default handler)'          => [
+                [
+                    [Tags::COMMAND_HANDLER, ['handles' => FetchById::class]],
+                    [Tags::QUERY_HANDLER, ['handles' => FetchById::class]],
+                ],
+                [FetchById::class => 'handler'],
+                [FetchById::class => 'handler'],
+            ],
+        ];
     }
 
     /**
@@ -105,19 +167,20 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
      *
      * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
      */
-    public function processShouldThrowAnExceptionIfAMiddlewareIsNotTaggedAsConnectedToAnyBus(): void
+    public function processShouldAddMiddlewaresToBothBusesWhenAMiddlewareIsNotTaggedAsConnectedToAnyBus(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
-
         $middleware = new Definition();
         $middleware->addTag(Tags::MIDDLEWARE);
 
-        $this->processCompilerPass(
+        $container = $this->processCompilerPass(
             self::COMMAND_BUS,
             self::QUERY_BUS,
             [],
             ['middleware' => $middleware]
         );
+
+        $this->assertSameDeclaredMiddlewares($container, self::COMMAND_BUS, [new Reference('middleware')]);
+        $this->assertSameDeclaredMiddlewares($container, self::QUERY_BUS, [new Reference('middleware')]);
     }
 
     /**

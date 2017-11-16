@@ -22,8 +22,8 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterServices implements CompilerPassInterface
 {
-    private const MESSAGE_INVALID_HANDLER    = 'You must specify the "bus" and "handles" arguments in "%s" (tag "%s").';
-    private const MESSAGE_INVALID_MIDDLEWARE = 'You must specify the "bus" argument in "%s" (tag "%s").';
+    private const INVALID_HANDLER     = 'You must specify the "bus" and "handles" arguments in "%s" (tag "%s").';
+    private const INVALID_BUS_HANDLER = 'You must specify the "handles" argument in "%s" (tag "%s").';
 
     private const OVERRIDABLE_DEPENDENCIES = [
         'message_creator'       => NamedConstructorCreator::class,
@@ -124,14 +124,45 @@ final class RegisterServices implements CompilerPassInterface
             foreach ($tags as $tag) {
                 if (! isset($tag['bus'], $tag['handles'])) {
                     throw new InvalidArgumentException(
-                        sprintf(self::MESSAGE_INVALID_HANDLER, $serviceId, Tags::HANDLER)
+                        sprintf(self::INVALID_HANDLER, $serviceId, Tags::HANDLER)
                     );
                 }
 
-                $handlers[$tag['bus']]                  = $handlers[$tag['bus']] ?? [];
-                $handlers[$tag['bus']][$tag['handles']] = $serviceId;
+                $handlers = $this->appendHandler($handlers, $tag['bus'], $tag['handles'], $serviceId);
             }
         }
+
+        foreach ($container->findTaggedServiceIds(Tags::COMMAND_HANDLER) as $serviceId => $tags) {
+            foreach ($tags as $tag) {
+                if (! isset($tag['handles'])) {
+                    throw new InvalidArgumentException(
+                        sprintf(self::INVALID_BUS_HANDLER, $serviceId, Tags::COMMAND_HANDLER)
+                    );
+                }
+
+                $handlers = $this->appendHandler($handlers, $this->commandBusId, $tag['handles'], $serviceId);
+            }
+        }
+
+        foreach ($container->findTaggedServiceIds(Tags::QUERY_HANDLER) as $serviceId => $tags) {
+            foreach ($tags as $tag) {
+                if (! isset($tag['handles'])) {
+                    throw new InvalidArgumentException(
+                        sprintf(self::INVALID_BUS_HANDLER, $serviceId, Tags::QUERY_HANDLER)
+                    );
+                }
+
+                $handlers = $this->appendHandler($handlers, $this->queryBusId, $tag['handles'], $serviceId);
+            }
+        }
+
+        return $handlers;
+    }
+
+    private function appendHandler(array $handlers, string $busId, string $message, string $serviceId): array
+    {
+        $handlers[$busId]           = $handlers[$busId] ?? [];
+        $handlers[$busId][$message] = $serviceId;
 
         return $handlers;
     }
@@ -145,19 +176,31 @@ final class RegisterServices implements CompilerPassInterface
 
         foreach ($container->findTaggedServiceIds(Tags::MIDDLEWARE) as $serviceId => $tags) {
             foreach ($tags as $tag) {
-                if (! isset($tag['bus'])) {
-                    throw new InvalidArgumentException(
-                        sprintf(self::MESSAGE_INVALID_MIDDLEWARE, $serviceId, Tags::MIDDLEWARE)
-                    );
-                }
-
                 $priority = $tag['priority'] ?? 0;
 
-                $middlewares[$tag['bus']]              = $middlewares[$tag['bus']] ?? [];
-                $middlewares[$tag['bus']][$priority]   = $middlewares[$tag['bus']][$priority] ?? [];
-                $middlewares[$tag['bus']][$priority][] = new Reference($serviceId);
+                if (! isset($tag['bus'])) {
+                    $middlewares = $this->appendMiddleware(
+                        $this->appendMiddleware($middlewares, $this->commandBusId, $priority, $serviceId),
+                        $this->queryBusId,
+                        $priority,
+                        $serviceId
+                    );
+
+                    continue;
+                }
+
+                $middlewares = $this->appendMiddleware($middlewares, $tag['bus'], $priority, $serviceId);
             }
         }
+
+        return $middlewares;
+    }
+
+    private function appendMiddleware(array $middlewares, string $busId, int $priority, string $serviceId): array
+    {
+        $middlewares[$busId]              = $middlewares[$busId] ?? [];
+        $middlewares[$busId][$priority]   = $middlewares[$busId][$priority] ?? [];
+        $middlewares[$busId][$priority][] = new Reference($serviceId);
 
         return $middlewares;
     }
