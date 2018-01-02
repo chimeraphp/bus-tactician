@@ -1,8 +1,5 @@
-parameters:
-    ignoreErrors:
-        # Ignore PHPUnit mock stuff
-        - '#but returns PHPUnit_Framework_MockObject_MockObject#'
-        - '#PHPUnit_Framework_MockObject_MockObject.* given#'
+includes:
+	- vendor/phpstan/phpstan-phpunit/extension.neon
 
-        # Ignore symfony/expression-language missing classes
-        - '#Symfony\\Component\\ExpressionLanguage\\ExpressionLanguage not found#'
+parameters:
+    ignoreErrors: []
