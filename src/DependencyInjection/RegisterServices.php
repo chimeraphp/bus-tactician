@@ -234,6 +234,7 @@ final class RegisterServices implements CompilerPassInterface
         array $middlewares
     ): void {
         $internalBus = $this->registerTacticianBus(
+            $this->commandBusId . '.inner',
             $container,
             $commandNameExtractor,
             $methodNameInflector,
@@ -259,6 +260,7 @@ final class RegisterServices implements CompilerPassInterface
         $middlewares[] = $this->registerReadModelConverter($container, $readModelConverter);
 
         $internalBus = $this->registerTacticianBus(
+            $this->queryBusId . '.inner',
             $container,
             $commandNameExtractor,
             $methodNameInflector,
@@ -285,14 +287,13 @@ final class RegisterServices implements CompilerPassInterface
     }
 
     private function registerTacticianBus(
+        string $id,
         ContainerBuilder $container,
         Reference $commandNameExtractor,
         Reference $methodNameInflector,
         array $handlers,
         array $middlewares
     ): Reference {
-        $id = uniqid('chimera.bus_internal.');
-
         $handlerMiddleware = $this->registerTacticianHandler(
             $container,
             $id,

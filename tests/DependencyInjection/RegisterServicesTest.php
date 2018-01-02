@@ -15,7 +15,8 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
 {
-    private const DEFAULT_MIDDLEWARES_PATTERN = '/^chimera\.(read_model_conversion|bus_internal)\..*(\.handler)?$/';
+    private const DEFAULT_MIDDLEWARES_PATTERN = '/^(chimera\.(read_model_conversion|bus_internal)\..*|'
+                                              . '.*\.inner\.handler)$/';
 
     private const COMMAND_BUS = 'command_bus';
     private const QUERY_BUS   = 'query_bus';
