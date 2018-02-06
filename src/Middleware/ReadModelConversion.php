@@ -18,6 +18,11 @@ final class ReadModelConversion implements Middleware
         $this->converter = $converter;
     }
 
+    /**
+     * @param object|mixed $query
+     *
+     * @return mixed
+     */
     public function execute($query, callable $next)
     {
         $result = $next($query);

@@ -6,14 +6,15 @@ namespace Lcobucci\Chimera\Bus\Tactician\Tests;
 use Lcobucci\Chimera\MessageCreator;
 use League\Tactician\CommandBus as ServiceBus;
 use League\Tactician\Middleware;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
 
-abstract class MessageBusTestCase extends \PHPUnit\Framework\TestCase
+abstract class MessageBusTestCase extends TestCase
 {
     protected function createMessageCreator(
         string $message,
         ServerRequestInterface $request,
-        $createdObject
+        object $createdObject
     ): MessageCreator {
         $messageCreator = $this->createMock(MessageCreator::class);
 
@@ -41,6 +42,11 @@ abstract class MessageBusTestCase extends \PHPUnit\Framework\TestCase
                         $this->callback = $callback;
                     }
 
+                    /**
+                     * @param object|mixed $command
+                     *
+                     * @return mixed
+                     */
                     public function execute($command, callable $next)
                     {
                         return ($this->callback)($command);

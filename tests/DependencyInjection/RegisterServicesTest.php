@@ -9,11 +9,16 @@ use Lcobucci\Chimera\Bus\Tactician\Tests\FetchById;
 use Lcobucci\Chimera\ReadModelConverter;
 use League\Tactician\Middleware;
 use League\Tactician\Plugins\NamedCommand\NamedCommandExtractor;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
+use function array_filter;
+use function current;
+use function end;
+use function preg_match;
 
-final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
+final class RegisterServicesTest extends TestCase
 {
     private const DEFAULT_MIDDLEWARES_PATTERN = '/^(chimera\.(read_model_conversion|bus_internal)\..*|'
                                               . '.*\.inner\.handler)$/';
@@ -63,6 +68,9 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     * @return mixed[]
+     */
     public function handlerTags(): array
     {
         return [
@@ -95,6 +103,10 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
      *
      * @dataProvider possibleHandlerTags
      *
+     * @param mixed[]  $tags
+     * @param string[] $expectedCommandHandlers
+     * @param string[] $expectedQueryHandlers
+     *
      * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesWhichAreConnectedToTheTaggedHandlers(
@@ -121,6 +133,9 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
         $this->assertSameHandlers($container, self::QUERY_BUS, $expectedQueryHandlers);
     }
 
+    /**
+     * @return mixed[]
+     */
     public function possibleHandlerTags(): array
     {
         return [
@@ -237,7 +252,7 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @dataProvider
+     * @return mixed[]
      */
     public function provideOverridableDependencies(): array
     {
@@ -246,26 +261,26 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
                 self::COMMAND_BUS,
                 'method_name_inflector',
                 'inflector',
-                2
+                2,
             ],
             'query bus with overridden inflector' => [
                 self::QUERY_BUS,
                 'method_name_inflector',
                 'inflector',
-                2
+                2,
             ],
             'command bus with overridden extractor' => [
                 self::COMMAND_BUS,
                 'class_name_extractor',
                 'extractor',
-                0
+                0,
             ],
             'query bus with overridden extractor' => [
                 self::QUERY_BUS,
                 'class_name_extractor',
                 'extractor',
-                0
-            ]
+                0,
+            ],
         ];
     }
 
@@ -333,6 +348,10 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     * @param mixed[]      $dependencies
+     * @param Definition[] $definitions
+     */
     public function processCompilerPass(
         string $commandBusId,
         string $queryBusId,
@@ -348,6 +367,9 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
         return $container;
     }
 
+    /**
+     * @param Reference[] $expectedMiddlewares
+     */
     private function assertSameDeclaredMiddlewares(
         ContainerBuilder $container,
         string $busId,
@@ -366,6 +388,9 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
         self::assertEquals($expectedMiddlewares, $middlewareList);
     }
 
+    /**
+     * @param string[] $handlerMap
+     */
     private function assertSameHandlers(ContainerBuilder $container, string $bus, array $handlerMap = []): void
     {
         $handlerLocator = $container->getDefinition(
@@ -405,6 +430,9 @@ final class RegisterServicesTest extends \PHPUnit\Framework\TestCase
         );
     }
 
+    /**
+     * @return string[]
+     */
     private function getBusMiddlewares(ContainerBuilder $container, string $bus): array
     {
         $internalBus = $container->getDefinition(

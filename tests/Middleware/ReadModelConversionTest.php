@@ -6,8 +6,9 @@ namespace Lcobucci\Chimera\Bus\Tactician\Tests\Middleware;
 use Lcobucci\Chimera\Bus\Tactician\Middleware\ReadModelConversion;
 use Lcobucci\Chimera\Bus\Tactician\Tests\FetchById;
 use Lcobucci\Chimera\ReadModelConverter;
+use PHPUnit\Framework\TestCase;
 
-final class ReadModelConversionTest extends \PHPUnit\Framework\TestCase
+final class ReadModelConversionTest extends TestCase
 {
     /**
      * @test
