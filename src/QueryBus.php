@@ -28,6 +28,9 @@ final class QueryBus implements QueryBusInterface
         $this->messageCreator = $messageCreator;
     }
 
+    /**
+     * @return mixed
+     */
     public function handle(string $query, ServerRequestInterface $request)
     {
         return $this->serviceBus->handle(

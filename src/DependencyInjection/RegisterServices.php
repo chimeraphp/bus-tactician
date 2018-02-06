@@ -19,6 +19,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Reference;
+use function array_combine;
+use function array_map;
+use function array_values;
+use function krsort;
+use function sprintf;
+use function uniqid;
 
 final class RegisterServices implements CompilerPassInterface
 {
@@ -43,10 +49,13 @@ final class RegisterServices implements CompilerPassInterface
     private $queryBusId;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private $dependencies;
 
+    /**
+     * @param mixed[] $dependencies
+     */
     public function __construct(
         string $commandBusId,
         string $queryBusId,
@@ -57,7 +66,7 @@ final class RegisterServices implements CompilerPassInterface
         $this->dependencies = $dependencies;
     }
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $dependencies      = $this->extractDependencies($container);
         $parsedHandlers    = $this->extractHandlers($container);
@@ -83,6 +92,9 @@ final class RegisterServices implements CompilerPassInterface
         );
     }
 
+    /**
+     * @return Reference[]
+     */
     private function extractDependencies(ContainerBuilder $container): array
     {
         $services = [];
@@ -107,7 +119,7 @@ final class RegisterServices implements CompilerPassInterface
         $reference = new Reference($id);
 
         if (! $container->has($id)) {
-            $container->setDefinition($id, $this->createService($defaultImplementation));
+            $container->setDefinition($id, new Definition($defaultImplementation));
         }
 
         return $reference;
@@ -159,6 +171,11 @@ final class RegisterServices implements CompilerPassInterface
         return $handlers;
     }
 
+    /**
+     * @param string[][] $handlers
+     *
+     * @return string[][]
+     */
     private function appendHandler(array $handlers, string $busId, string $message, string $serviceId): array
     {
         $handlers[$busId]           = $handlers[$busId] ?? [];
@@ -196,6 +213,11 @@ final class RegisterServices implements CompilerPassInterface
         return $middlewares;
     }
 
+    /**
+     * @param Reference[][][] $middlewares
+     *
+     * @return Reference[][][]
+     */
     private function appendMiddleware(array $middlewares, string $busId, int $priority, string $serviceId): array
     {
         $middlewares[$busId]              = $middlewares[$busId] ?? [];
@@ -225,6 +247,10 @@ final class RegisterServices implements CompilerPassInterface
         return $prioritised;
     }
 
+    /**
+     * @param string[]    $handlers
+     * @param Reference[] $middlewares
+     */
     private function registerCommandBus(
         ContainerBuilder $container,
         Reference $messageCreator,
@@ -244,10 +270,14 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $this->commandBusId,
-            $this->createService(CommandBus::class, [$internalBus, $messageCreator])
+            new Definition(CommandBus::class, [$internalBus, $messageCreator])
         );
     }
 
+    /**
+     * @param string[]    $handlers
+     * @param Reference[] $middlewares
+     */
     private function registerQueryBus(
         ContainerBuilder $container,
         Reference $messageCreator,
@@ -270,7 +300,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $this->queryBusId,
-            $this->createService(QueryBus::class, [$internalBus, $messageCreator])
+            new Definition(QueryBus::class, [$internalBus, $messageCreator])
         );
     }
 
@@ -280,12 +310,16 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $readModelConversionId,
-            $this->createService(ReadModelConversion::class, [$readModelConverter])
+            new Definition(ReadModelConversion::class, [$readModelConverter])
         );
 
         return new Reference($readModelConversionId);
     }
 
+    /**
+     * @param string[]    $handlers
+     * @param Reference[] $middlewares
+     */
     private function registerTacticianBus(
         string $id,
         ContainerBuilder $container,
@@ -306,12 +340,15 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $id,
-            $this->createService(ServiceBus::class, [$middlewares])
+            new Definition(ServiceBus::class, [$middlewares])
         );
 
         return new Reference($id);
     }
 
+    /**
+     * @param string[] $handlers
+     */
     private function registerTacticianHandler(
         ContainerBuilder $container,
         string $busId,
@@ -329,12 +366,15 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $id,
-            $this->createService(CommandHandlerMiddleware::class, $arguments)
+            new Definition(CommandHandlerMiddleware::class, $arguments)
         );
 
         return new Reference($id);
     }
 
+    /**
+     * @param string[] $handlers
+     */
     private function registerTacticianLocator(
         ContainerBuilder $container,
         string $handlerId,
@@ -344,7 +384,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $id,
-            $this->createService(
+            new Definition(
                 ContainerLocator::class,
                 [$this->registerServiceLocator($container, $handlers), $handlers]
             )
@@ -353,6 +393,9 @@ final class RegisterServices implements CompilerPassInterface
         return new Reference($id);
     }
 
+    /**
+     * @param string[] $handlers
+     */
     private function registerServiceLocator(ContainerBuilder $container, array $handlers): Reference
     {
         $serviceIds = array_values($handlers);
@@ -366,10 +409,5 @@ final class RegisterServices implements CompilerPassInterface
                 array_combine($serviceIds, $serviceIds)
             )
         );
-    }
-
-    private function createService(string $class, array $arguments = []): Definition
-    {
-        return (new Definition($class, $arguments))->setPublic(false);
     }
 }

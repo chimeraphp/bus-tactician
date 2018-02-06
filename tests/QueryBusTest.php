@@ -38,6 +38,9 @@ final class QueryBusTest extends MessageBusTestCase
         );
     }
 
+    /**
+     * @return mixed
+     */
     private function handle(callable $handler)
     {
         $request = $this->createMock(ServerRequestInterface::class);
