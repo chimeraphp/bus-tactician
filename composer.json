@@ -20,6 +20,7 @@
         "league/tactician": "^1.0"
     },
     "require-dev": {
+        "infection/infection": "^0.7",
         "league/tactician-container": "^2.0",
         "phpstan/phpstan": "^0.9",
         "phpstan/phpstan-phpunit": "^0.9",
