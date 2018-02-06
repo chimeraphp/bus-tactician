@@ -119,7 +119,7 @@ final class RegisterServices implements CompilerPassInterface
         $reference = new Reference($id);
 
         if (! $container->has($id)) {
-            $container->setDefinition($id, $this->createService($defaultImplementation));
+            $container->setDefinition($id, new Definition($defaultImplementation));
         }
 
         return $reference;
@@ -270,7 +270,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $this->commandBusId,
-            $this->createService(CommandBus::class, [$internalBus, $messageCreator])
+            new Definition(CommandBus::class, [$internalBus, $messageCreator])
         );
     }
 
@@ -300,7 +300,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $this->queryBusId,
-            $this->createService(QueryBus::class, [$internalBus, $messageCreator])
+            new Definition(QueryBus::class, [$internalBus, $messageCreator])
         );
     }
 
@@ -310,7 +310,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $readModelConversionId,
-            $this->createService(ReadModelConversion::class, [$readModelConverter])
+            new Definition(ReadModelConversion::class, [$readModelConverter])
         );
 
         return new Reference($readModelConversionId);
@@ -340,7 +340,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $id,
-            $this->createService(ServiceBus::class, [$middlewares])
+            new Definition(ServiceBus::class, [$middlewares])
         );
 
         return new Reference($id);
@@ -366,7 +366,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $id,
-            $this->createService(CommandHandlerMiddleware::class, $arguments)
+            new Definition(CommandHandlerMiddleware::class, $arguments)
         );
 
         return new Reference($id);
@@ -384,7 +384,7 @@ final class RegisterServices implements CompilerPassInterface
 
         $container->setDefinition(
             $id,
-            $this->createService(
+            new Definition(
                 ContainerLocator::class,
                 [$this->registerServiceLocator($container, $handlers), $handlers]
             )
@@ -409,13 +409,5 @@ final class RegisterServices implements CompilerPassInterface
                 array_combine($serviceIds, $serviceIds)
             )
         );
-    }
-
-    /**
-     * @param mixed[] $arguments
-     */
-    private function createService(string $class, array $arguments = []): Definition
-    {
-        return (new Definition($class, $arguments))->setPublic(false);
     }
 }
