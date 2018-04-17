@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician\Tests;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests;
 
-use Lcobucci\Chimera\Bus\Tactician\CommandBus;
+use Lcobucci\Chimera\ServiceBus\Tactician\CommandBus;
 use Psr\Http\Message\ServerRequestInterface;
 
 final class CommandBusTest extends MessageBusTestCase
@@ -11,7 +11,7 @@ final class CommandBusTest extends MessageBusTestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\CommandBus
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\CommandBus
      */
     public function handleShouldCreateTheMessageAndSendItToTheBus(): void
     {
@@ -27,7 +27,7 @@ final class CommandBusTest extends MessageBusTestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\CommandBus
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\CommandBus
      */
     public function handleShouldNotCatchAnyException(): void
     {

@@ -35,12 +35,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Lcobucci\\Chimera\\Bus\\Tactician\\": "src"
+            "Lcobucci\\Chimera\\ServiceBus\\Tactician\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Lcobucci\\Chimera\\Bus\\Tactician\\Tests\\": "tests"
+            "Lcobucci\\Chimera\\ServiceBus\\Tactician\\Tests\\": "tests"
         }
     },
     "extra": {

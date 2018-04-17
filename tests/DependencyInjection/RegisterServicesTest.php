@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician\Tests\DependencyInjection;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests\DependencyInjection;
 
-use Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices;
-use Lcobucci\Chimera\Bus\Tactician\DependencyInjection\Tags;
-use Lcobucci\Chimera\Bus\Tactician\Tests\FetchById;
+use Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices;
+use Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\Tags;
+use Lcobucci\Chimera\ServiceBus\Tactician\Tests\FetchById;
 use Lcobucci\Chimera\ReadModelConverter;
 use League\Tactician\Middleware;
 use League\Tactician\Plugins\NamedCommand\NamedCommandExtractor;
@@ -29,7 +29,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldThrowAnExceptionIfAHandlerIsNotTaggedAsConnectedToAnyBus(): void
     {
@@ -51,7 +51,7 @@ final class RegisterServicesTest extends TestCase
      *
      * @dataProvider handlerTags
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldThrowAnExceptionIfAHandlerIsNotTaggedToHandleSomething(string $tag): void
     {
@@ -83,7 +83,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesWithDefaultHandlersConnected(): void
     {
@@ -107,7 +107,7 @@ final class RegisterServicesTest extends TestCase
      * @param string[] $expectedCommandHandlers
      * @param string[] $expectedQueryHandlers
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesWhichAreConnectedToTheTaggedHandlers(
         array $tags,
@@ -181,7 +181,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldAddMiddlewaresToBothBusesWhenAMiddlewareIsNotTaggedAsConnectedToAnyBus(): void
     {
@@ -202,7 +202,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesWithDefaultMiddlewaresIfContainerIsEmpty(): void
     {
@@ -220,7 +220,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldAlwaysCreateCommandAndQueryBusesWithAPrioritizedListOfMiddlewares(): void
     {
@@ -289,7 +289,7 @@ final class RegisterServicesTest extends TestCase
      *
      * @dataProvider provideOverridableDependencies
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesThatUsesOverriddenDependencies(
         string $bus,
@@ -310,7 +310,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesThatUseOverriddenConverterInsteadOfDefaultOne(): void
     {
@@ -329,7 +329,7 @@ final class RegisterServicesTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\DependencyInjection\RegisterServices
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection\RegisterServices
      */
     public function processShouldCreateCommandAndQueryBusesThatUseOverriddenMessageCreatorInsteadOfDefaultOne(): void
     {

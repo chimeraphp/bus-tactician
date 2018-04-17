@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician\Tests\Middleware;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests\Middleware;
 
-use Lcobucci\Chimera\Bus\Tactician\Middleware\ReadModelConversion;
-use Lcobucci\Chimera\Bus\Tactician\Tests\FetchById;
+use Lcobucci\Chimera\ServiceBus\Tactician\Middleware\ReadModelConversion;
+use Lcobucci\Chimera\ServiceBus\Tactician\Tests\FetchById;
 use Lcobucci\Chimera\ReadModelConverter;
 use PHPUnit\Framework\TestCase;
 
@@ -13,7 +13,7 @@ final class ReadModelConversionTest extends TestCase
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\Bus\Tactician\Middleware\ReadModelConversion
+     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\Middleware\ReadModelConversion
      */
     public function executeShouldProcessNextMiddlewareAndUseTheConverterToModifyTheResult(): void
     {

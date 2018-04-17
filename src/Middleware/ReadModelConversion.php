@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician\Middleware;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\Middleware;
 
 use Lcobucci\Chimera\ReadModelConverter;
 use League\Tactician\Middleware;

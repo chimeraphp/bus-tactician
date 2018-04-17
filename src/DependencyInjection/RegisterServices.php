@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician\DependencyInjection;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection;
 
-use Lcobucci\Chimera\Bus\Tactician\CommandBus;
-use Lcobucci\Chimera\Bus\Tactician\Middleware\ReadModelConversion;
-use Lcobucci\Chimera\Bus\Tactician\QueryBus;
+use Lcobucci\Chimera\ServiceBus\Tactician\CommandBus;
+use Lcobucci\Chimera\ServiceBus\Tactician\Middleware\ReadModelConversion;
+use Lcobucci\Chimera\ServiceBus\Tactician\QueryBus;
 use Lcobucci\Chimera\MessageCreator\NamedConstructorCreator;
 use Lcobucci\Chimera\ReadModelConverter\CallbackConverter;
 use League\Tactician\CommandBus as ServiceBus;

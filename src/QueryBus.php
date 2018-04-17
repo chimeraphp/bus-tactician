@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician;
+namespace Lcobucci\Chimera\ServiceBus\Tactician;
 
 use Lcobucci\Chimera\MessageCreator;
 use Lcobucci\Chimera\QueryBus as QueryBusInterface;

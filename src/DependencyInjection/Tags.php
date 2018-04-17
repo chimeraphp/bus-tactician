@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\Bus\Tactician\DependencyInjection;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\DependencyInjection;
 
 interface Tags
 {
