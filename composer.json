@@ -1,6 +1,6 @@
 {
     "name": "lcobucci/chimera-bus-tactician",
-    "description": "Tactician implementation connecting lcobucci/chimera-foundation and lcobucci/chimera-routing",
+    "description": "Service bus adapter for league/tactician",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -17,21 +17,16 @@
         "php": "^7.2",
         "lcobucci/chimera-foundation": "^1.0@alpha",
         "lcobucci/chimera-routing": "^1.0@alpha",
-        "league/tactician": "^1.0"
+        "league/tactician": "^1.0",
+        "league/tactician-container": "^2.0"
     },
     "require-dev": {
         "doctrine/coding-standard": "^3.0",
         "infection/infection": "^0.7",
-        "league/tactician-container": "^2.0",
         "phpstan/phpstan": "^0.9",
         "phpstan/phpstan-phpunit": "^0.9",
         "phpunit/phpunit": "^7.0",
-        "squizlabs/php_codesniffer": "^3.2",
-        "symfony/dependency-injection": "^4.0"
-    },
-    "suggest": {
-        "league/tactician-container": "In order to use any PSR-11 compatible library to load handlers",
-        "symfony/dependency-injection": "In order to use the provided compiler passes"
+        "squizlabs/php_codesniffer": "^3.2"
     },
     "autoload": {
         "psr-4": {
