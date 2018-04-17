@@ -1,19 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests\Middleware;
+namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests;
 
-use Lcobucci\Chimera\ServiceBus\Tactician\Middleware\ReadModelConversion;
-use Lcobucci\Chimera\ServiceBus\Tactician\Tests\FetchById;
-use Lcobucci\Chimera\ReadModelConverter;
+use Lcobucci\Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
+use Lcobucci\Chimera\ServiceBus\ReadModelConverter;
 use PHPUnit\Framework\TestCase;
 
-final class ReadModelConversionTest extends TestCase
+/**
+ * @coversDefaultClass \Lcobucci\Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware
+ */
+final class ReadModelConversionMiddlewareTest extends TestCase
 {
     /**
      * @test
      *
-     * @covers \Lcobucci\Chimera\ServiceBus\Tactician\Middleware\ReadModelConversion
+     * @covers ::__construct()
+     * @covers ::execute()
      */
     public function executeShouldProcessNextMiddlewareAndUseTheConverterToModifyTheResult(): void
     {
@@ -29,7 +32,7 @@ final class ReadModelConversionTest extends TestCase
                   ->with($query, $callback())
                   ->willReturn('b');
 
-        $middleware = new ReadModelConversion($converter);
+        $middleware = new ReadModelConversionMiddleware($converter);
 
         self::assertSame('b', $middleware->execute($query, $callback));
     }
