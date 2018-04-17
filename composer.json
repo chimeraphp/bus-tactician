@@ -20,7 +20,7 @@
         "league/tactician-container": "^2.0"
     },
     "require-dev": {
-        "doctrine/coding-standard": "^3.0",
+        "doctrine/coding-standard": "^4.0",
         "infection/infection": "^0.7",
         "phpstan/phpstan": "^0.9",
         "phpstan/phpstan-phpunit": "^0.9",

@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests;
 
-use Lcobucci\Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
 use Lcobucci\Chimera\ServiceBus\ReadModelConverter;
+use Lcobucci\Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
 use PHPUnit\Framework\TestCase;
 
 /**

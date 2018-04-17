@@ -24,19 +24,22 @@ final class ServiceBusTest extends TestCase
      */
     public function createBus(): void
     {
-        $this->tacticianBus = new CommandBus(
-            [
-                new class implements Middleware
-                {
-                    public function execute($command, callable $next)
-                    {
-                        assert($command instanceof FetchById);
+        $middleware = new class implements Middleware
+        {
+            /**
+             * @param mixed $command
+             *
+             * @return mixed
+             */
+            public function execute($command, callable $next)
+            {
+                assert($command instanceof FetchById);
 
-                        return 'Everything good';
-                    }
-                }
-            ]
-        );
+                return 'Everything good';
+            }
+        };
+
+        $this->tacticianBus = new CommandBus([$middleware]);
     }
 
     /**
