@@ -27,7 +27,7 @@ final class ReadModelConversionMiddlewareTest extends TestCase
             return 'a';
         };
 
-        $converter->expects($this->once())
+        $converter->expects(self::once())
                   ->method('convert')
                   ->with($query, $callback())
                   ->willReturn('b');
