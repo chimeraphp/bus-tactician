@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests;
+namespace Chimera\ServiceBus\Tactician\Tests;
 
-use Lcobucci\Chimera\ServiceBus\Tactician\ServiceBus;
+use Chimera\ServiceBus\Tactician\ServiceBus;
 use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 use PHPUnit\Framework\TestCase;
 use function assert;
 
 /**
- * @coversDefaultClass \Lcobucci\Chimera\ServiceBus\Tactician\ServiceBus
+ * @coversDefaultClass \Chimera\ServiceBus\Tactician\ServiceBus
  */
 final class ServiceBusTest extends TestCase
 {

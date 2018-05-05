@@ -1,14 +1,14 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests;
+namespace Chimera\ServiceBus\Tactician\Tests;
 
-use Lcobucci\Chimera\ServiceBus\ReadModelConverter;
-use Lcobucci\Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
+use Chimera\ServiceBus\ReadModelConverter;
+use Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @coversDefaultClass \Lcobucci\Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware
+ * @coversDefaultClass \Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware
  */
 final class ReadModelConversionMiddlewareTest extends TestCase
 {

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\ServiceBus\Tactician\Tests;
+namespace Chimera\ServiceBus\Tactician\Tests;
 
 final class FetchById
 {

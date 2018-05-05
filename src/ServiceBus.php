@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\ServiceBus\Tactician;
+namespace Chimera\ServiceBus\Tactician;
 
-use Lcobucci\Chimera\ServiceBus as ServiceBusInterface;
+use Chimera\ServiceBus as ServiceBusInterface;
 use League\Tactician\CommandBus;
 
 final class ServiceBus implements ServiceBusInterface

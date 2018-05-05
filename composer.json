@@ -15,7 +15,7 @@
     },
     "require": {
         "php": "^7.2",
-        "lcobucci/chimera-foundation": "^1.0@rc",
+        "chimera/foundation": "^0.1",
         "league/tactician": "^1.0",
         "league/tactician-container": "^2.0"
     },
@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Lcobucci\\Chimera\\ServiceBus\\Tactician\\": "src"
+            "Chimera\\ServiceBus\\Tactician\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Lcobucci\\Chimera\\ServiceBus\\Tactician\\Tests\\": "tests"
+            "Chimera\\ServiceBus\\Tactician\\Tests\\": "tests"
         }
     },
     "extra": {

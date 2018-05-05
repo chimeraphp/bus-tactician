@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Lcobucci\Chimera\ServiceBus\Tactician;
+namespace Chimera\ServiceBus\Tactician;
 
-use Lcobucci\Chimera\ServiceBus\ReadModelConverter;
+use Chimera\ServiceBus\ReadModelConverter;
 use League\Tactician\Middleware;
 
 final class ReadModelConversionMiddleware implements Middleware
