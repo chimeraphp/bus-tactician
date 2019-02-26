@@ -23,7 +23,7 @@ final class ReadModelConversionMiddlewareTest extends TestCase
         $query     = new FetchById(1);
         $converter = $this->createMock(ReadModelConverter::class);
 
-        $callback = function (): string {
+        $callback = static function (): string {
             return 'a';
         };
 
