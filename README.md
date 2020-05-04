@@ -5,7 +5,7 @@
 [![Unstable Version](https://img.shields.io/packagist/vpre/chimera/bus-tactician.svg?style=flat-square)](https://packagist.org/packages/chimera/bus-tactician)
 
 ![Branch master](https://img.shields.io/badge/branch-master-brightgreen.svg?style=flat-square)
-[![Build Status](https://img.shields.io/travis/chimeraphp/bus-tactician/master.svg?style=flat-square)](http://travis-ci.org/#!/chimeraphp/bus-tactician)
+[![Build Status](https://img.shields.io/travis/com/chimeraphp/bus-tactician/master.svg?style=flat-square)](http://travis-ci.com/chimeraphp/bus-tactician)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/chimeraphp/bus-tactician/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/chimeraphp/bus-tactician/?branch=master)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/chimeraphp/bus-tactician/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/chimeraphp/bus-tactician/?branch=master)
 
