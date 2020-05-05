@@ -8,10 +8,7 @@ use League\Tactician\Middleware;
 
 final class ReadModelConversionMiddleware implements Middleware
 {
-    /**
-     * @var ReadModelConverter
-     */
-    private $converter;
+    private ReadModelConverter $converter;
 
     public function __construct(ReadModelConverter $converter)
     {
