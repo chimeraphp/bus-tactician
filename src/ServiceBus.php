@@ -8,10 +8,7 @@ use League\Tactician\CommandBus;
 
 final class ServiceBus implements ServiceBusInterface
 {
-    /**
-     * @var CommandBus
-     */
-    private $bus;
+    private CommandBus $bus;
 
     public function __construct(CommandBus $bus)
     {

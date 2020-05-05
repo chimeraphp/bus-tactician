@@ -14,10 +14,7 @@ use function assert;
  */
 final class ServiceBusTest extends TestCase
 {
-    /**
-     * @var CommandBus
-     */
-    private $tacticianBus;
+    private CommandBus $tacticianBus;
 
     /**
      * @before
