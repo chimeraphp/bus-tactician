@@ -20,7 +20,7 @@
         "league/tactician-container": "^2.0"
     },
     "require-dev": {
-        "infection/infection": "^0.16",
+        "infection/infection": "^0.17",
         "lcobucci/coding-standard": "^4.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12",
