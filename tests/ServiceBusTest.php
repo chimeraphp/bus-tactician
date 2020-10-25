@@ -7,18 +7,15 @@ use Chimera\ServiceBus\Tactician\ServiceBus;
 use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
 use PHPUnit\Framework\TestCase;
+
 use function assert;
 
-/**
- * @coversDefaultClass \Chimera\ServiceBus\Tactician\ServiceBus
- */
+/** @coversDefaultClass \Chimera\ServiceBus\Tactician\ServiceBus */
 final class ServiceBusTest extends TestCase
 {
     private CommandBus $tacticianBus;
 
-    /**
-     * @before
-     */
+    /** @before */
     public function createBus(): void
     {
         $middleware = new class implements Middleware
@@ -28,6 +25,7 @@ final class ServiceBusTest extends TestCase
              *
              * @return mixed
              */
+            // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
             public function execute($command, callable $next)
             {
                 assert($command instanceof FetchById);

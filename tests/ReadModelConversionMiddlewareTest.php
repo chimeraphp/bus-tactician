@@ -7,9 +7,7 @@ use Chimera\ServiceBus\ReadModelConverter;
 use Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @coversDefaultClass \Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware
- */
+/** @coversDefaultClass \Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware */
 final class ReadModelConversionMiddlewareTest extends TestCase
 {
     /**
