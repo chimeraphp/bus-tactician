@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chimeraphp/foundation.git",
-                "reference": "e49a5ab0dd0859c53900b5e041323bc2c23d3fb4"
+                "reference": "68863d332d71b905d541677d80376761b5400845"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chimeraphp/foundation/zipball/e49a5ab0dd0859c53900b5e041323bc2c23d3fb4",
-                "reference": "e49a5ab0dd0859c53900b5e041323bc2c23d3fb4",
+                "url": "https://api.github.com/repos/chimeraphp/foundation/zipball/68863d332d71b905d541677d80376761b5400845",
+                "reference": "68863d332d71b905d541677d80376761b5400845",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-20T17:23:31+00:00"
+            "time": "2020-11-21T12:59:54+00:00"
         },
         {
             "name": "league/tactician",
@@ -1949,16 +1949,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.3",
+            "version": "9.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "6b20e2055f7c29b56cb3870b3de7cc463d7add41"
+                "reference": "0a7f0acf9269c190fd982b5c04423feae986b6e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/6b20e2055f7c29b56cb3870b3de7cc463d7add41",
-                "reference": "6b20e2055f7c29b56cb3870b3de7cc463d7add41",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/0a7f0acf9269c190fd982b5c04423feae986b6e0",
+                "reference": "0a7f0acf9269c190fd982b5c04423feae986b6e0",
                 "shasum": ""
             },
             "require": {
@@ -2018,7 +2018,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-10-30T10:46:41+00:00"
+            "time": "2020-11-27T06:15:15+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
