@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chimeraphp/foundation.git",
-                "reference": "192ea32bc400ac0447c37d62ed4a8e95da7f73f4"
+                "reference": "d0c193db4da153d9075c4b085f5301b1ed535f0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chimeraphp/foundation/zipball/192ea32bc400ac0447c37d62ed4a8e95da7f73f4",
-                "reference": "192ea32bc400ac0447c37d62ed4a8e95da7f73f4",
+                "url": "https://api.github.com/repos/chimeraphp/foundation/zipball/d0c193db4da153d9075c4b085f5301b1ed535f0b",
+                "reference": "d0c193db4da153d9075c4b085f5301b1ed535f0b",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-30T06:42:27+00:00"
+            "time": "2020-11-30T06:48:54+00:00"
         },
         {
             "name": "league/tactician",
@@ -4124,16 +4124,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v5.1.8",
+            "version": "v5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "f00872c3f6804150d6a0f73b4151daab96248101"
+                "reference": "240e74140d4d956265048f3025c0aecbbc302d54"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/f00872c3f6804150d6a0f73b4151daab96248101",
-                "reference": "f00872c3f6804150d6a0f73b4151daab96248101",
+                "url": "https://api.github.com/repos/symfony/process/zipball/240e74140d4d956265048f3025c0aecbbc302d54",
+                "reference": "240e74140d4d956265048f3025c0aecbbc302d54",
                 "shasum": ""
             },
             "require": {
@@ -4179,7 +4179,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-10-24T12:01:57+00:00"
+            "time": "2020-11-02T15:47:15+00:00"
         },
         {
             "name": "symfony/service-contracts",
