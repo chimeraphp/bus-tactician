@@ -64,12 +64,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/chimeraphp/foundation.git",
-                "reference": "f6337614b6265222de7ab842c3c1b0c05c385dcd"
+                "reference": "3a3423e2714255f712aabb2f05dd984d847eb100"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chimeraphp/foundation/zipball/f6337614b6265222de7ab842c3c1b0c05c385dcd",
-                "reference": "f6337614b6265222de7ab842c3c1b0c05c385dcd",
+                "url": "https://api.github.com/repos/chimeraphp/foundation/zipball/3a3423e2714255f712aabb2f05dd984d847eb100",
+                "reference": "3a3423e2714255f712aabb2f05dd984d847eb100",
                 "shasum": ""
             },
             "require": {
@@ -118,7 +118,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2020-11-30T06:53:32+00:00"
+            "time": "2020-11-30T10:51:45+00:00"
         },
         {
             "name": "league/tactician",
@@ -2247,16 +2247,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.4.3",
+            "version": "9.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab"
+                "reference": "6535e637961f0829832621dc1b7308c2d24a799e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab",
-                "reference": "9fa359ff5ddaa5eb2be2bedb08a6a5787a5807ab",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6535e637961f0829832621dc1b7308c2d24a799e",
+                "reference": "6535e637961f0829832621dc1b7308c2d24a799e",
                 "shasum": ""
             },
             "require": {
@@ -2342,7 +2342,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-11-10T12:53:30+00:00"
+            "time": "2020-12-01T04:58:47+00:00"
         },
         {
             "name": "psr/log",
