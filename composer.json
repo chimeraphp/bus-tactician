@@ -12,8 +12,8 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "chimera/foundation": "^0.4@dev",
-        "league/tactician": "^1.0",
-        "league/tactician-container": "^2.0"
+        "league/tactician": "^1.1",
+        "psr/container": "^1.0"
     },
     "provide": {
         "chimera/bus-implementation": "0.4.0"
@@ -31,11 +31,6 @@
     "config": {
         "preferred-install": "dist",
         "sort-packages": true
-    },
-    "extra": {
-        "unused": [
-            "league/tactician-container"
-        ]
     },
     "autoload": {
         "psr-4": {
