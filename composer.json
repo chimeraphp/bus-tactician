@@ -19,7 +19,7 @@
         "chimera/bus-implementation": "0.4.0"
     },
     "require-dev": {
-        "infection/infection": "^0.21",
+        "infection/infection": "^0.25",
         "lcobucci/coding-standard": "^8.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan": "^0.12",
