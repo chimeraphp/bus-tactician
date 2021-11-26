@@ -15,10 +15,7 @@ final class ServiceBus implements ServiceBusInterface
         $this->bus = $bus;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function handle(object $message)
+    public function handle(object $message): mixed
     {
         return $this->bus->handle($message);
     }
