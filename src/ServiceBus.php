@@ -8,11 +8,8 @@ use League\Tactician\CommandBus;
 
 final class ServiceBus implements ServiceBusInterface
 {
-    private CommandBus $bus;
-
-    public function __construct(CommandBus $bus)
+    public function __construct(private CommandBus $bus)
     {
-        $this->bus = $bus;
     }
 
     public function handle(object $message): mixed

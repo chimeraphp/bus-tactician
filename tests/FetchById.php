@@ -5,10 +5,7 @@ namespace Chimera\ServiceBus\Tactician\Tests;
 
 final class FetchById
 {
-    public int $id;
-
-    public function __construct(int $id)
+    public function __construct(public int $id)
     {
-        $this->id = $id;
     }
 }

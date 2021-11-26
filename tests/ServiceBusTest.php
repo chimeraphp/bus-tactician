@@ -20,13 +20,8 @@ final class ServiceBusTest extends TestCase
     {
         $middleware = new class implements Middleware
         {
-            /**
-             * @param mixed $command
-             *
-             * @return mixed
-             */
             // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter
-            public function execute($command, callable $next)
+            public function execute(mixed $command, callable $next): mixed
             {
                 assert($command instanceof FetchById);
 

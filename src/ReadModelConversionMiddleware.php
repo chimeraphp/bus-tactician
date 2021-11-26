@@ -8,19 +8,11 @@ use League\Tactician\Middleware;
 
 final class ReadModelConversionMiddleware implements Middleware
 {
-    private ReadModelConverter $converter;
-
-    public function __construct(ReadModelConverter $converter)
+    public function __construct(private ReadModelConverter $converter)
     {
-        $this->converter = $converter;
     }
 
-    /**
-     * @param object|mixed $query
-     *
-     * @return mixed
-     */
-    public function execute($query, callable $next)
+    public function execute(mixed $query, callable $next): mixed
     {
         $result = $next($query);
 
