@@ -10,6 +10,7 @@ use Psr\Container\ContainerInterface;
 
 use function array_key_exists;
 use function assert;
+use function is_object;
 use function method_exists;
 
 final class CommandHandler implements Middleware, HandlerLocator
@@ -39,7 +40,10 @@ final class CommandHandler implements Middleware, HandlerLocator
             throw MissingHandlerException::forCommand($commandName);
         }
 
-        return $this->container->get($this->handlers[$commandName]['service']);
+        $handler = $this->container->get($this->handlers[$commandName]['service']);
+        assert(is_object($handler));
+
+        return $handler;
     }
 
     private function getMethodToCall(string $commandName): string
