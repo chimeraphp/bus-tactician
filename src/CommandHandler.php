@@ -10,28 +10,21 @@ use Psr\Container\ContainerInterface;
 
 use function array_key_exists;
 use function assert;
-use function get_class;
+use function is_object;
 use function method_exists;
 
 final class CommandHandler implements Middleware, HandlerLocator
 {
-    private ContainerInterface $container;
-
-    /** @var array<string, array{service: string, method: string}> */
-    private array $handlers;
-
     /** @param array<string, array{service: string, method: string}> $handlers */
-    public function __construct(ContainerInterface $container, array $handlers)
+    public function __construct(private ContainerInterface $container, private array $handlers)
     {
-        $this->container = $container;
-        $this->handlers  = $handlers;
     }
 
     /** @inheritdoc  */
     // phpcs:ignore SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
     public function execute($command, callable $next)
     {
-        $className = get_class($command);
+        $className = $command::class;
 
         $handler = $this->getHandlerForCommand($className);
         $method  = $this->getMethodToCall($className);
@@ -47,7 +40,10 @@ final class CommandHandler implements Middleware, HandlerLocator
             throw MissingHandlerException::forCommand($commandName);
         }
 
-        return $this->container->get($this->handlers[$commandName]['service']);
+        $handler = $this->container->get($this->handlers[$commandName]['service']);
+        assert(is_object($handler));
+
+        return $handler;
     }
 
     private function getMethodToCall(string $commandName): string

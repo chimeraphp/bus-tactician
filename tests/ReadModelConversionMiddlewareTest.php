@@ -21,17 +21,18 @@ final class ReadModelConversionMiddlewareTest extends TestCase
         $query     = new FetchById(1);
         $converter = $this->createMock(ReadModelConverter::class);
 
-        $callback = static function (): string {
-            return 'a';
-        };
+        $domainObject   = (object) ['name' => 'a'];
+        $transferObject = (object) ['name' => 'b'];
+
+        $callback = static fn (): object => $domainObject;
 
         $converter->expects(self::once())
                   ->method('convert')
                   ->with($query, $callback())
-                  ->willReturn('b');
+                  ->willReturn($transferObject);
 
         $middleware = new ReadModelConversionMiddleware($converter);
 
-        self::assertSame('b', $middleware->execute($query, $callback));
+        self::assertSame($transferObject, $middleware->execute($query, $callback));
     }
 }

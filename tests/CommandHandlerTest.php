@@ -21,7 +21,7 @@ final class CommandHandlerTest extends TestCase
     {
         $commandHandler = new CommandHandler(
             $this->createMock(ContainerInterface::class),
-            []
+            [],
         );
 
         $this->expectExceptionObject(MissingHandlerException::forCommand(FetchById::class));
@@ -50,7 +50,7 @@ final class CommandHandlerTest extends TestCase
 
         $commandHandler = new CommandHandler(
             $container,
-            [FetchById::class => ['service' => 'handler', 'method' => 'testing']]
+            [FetchById::class => ['service' => 'handler', 'method' => 'testing']],
         );
 
         self::assertSame('Here is the item #1', $commandHandler->execute(new FetchById(1), 'is_string'));
