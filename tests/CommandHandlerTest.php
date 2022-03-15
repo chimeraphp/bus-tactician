@@ -46,11 +46,11 @@ final class CommandHandlerTest extends TestCase
         };
 
         $container = $this->createMock(ContainerInterface::class);
-        $container->expects(self::once())->method('get')->with('handler')->willReturn($handler);
+        $container->expects(self::once())->method('get')->with($handler::class)->willReturn($handler);
 
         $commandHandler = new CommandHandler(
             $container,
-            [FetchById::class => ['service' => 'handler', 'method' => 'testing']],
+            [FetchById::class => ['service' => $handler::class, 'method' => 'testing']],
         );
 
         self::assertSame('Here is the item #1', $commandHandler->execute(new FetchById(1), 'is_string'));

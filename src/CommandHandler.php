@@ -15,9 +15,11 @@ use function method_exists;
 
 final class CommandHandler implements Middleware, HandlerLocator
 {
-    /** @param array<string, array{service: string, method: string}> $handlers */
-    public function __construct(private ContainerInterface $container, private array $handlers)
-    {
+    /** @param array<class-string, array{service: class-string, method: string}> $handlers */
+    public function __construct(
+        private readonly ContainerInterface $container,
+        private readonly array $handlers,
+    ) {
     }
 
     /** @inheritdoc  */
