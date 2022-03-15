@@ -26,7 +26,7 @@
         "phpunit/phpunit": "^9.5"
     },
     "provide": {
-        "chimera/bus-implementation": "0.5.0"
+        "chimera/bus-implementation": "1.0.0"
     },
     "autoload": {
         "psr-4": {
