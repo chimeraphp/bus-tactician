@@ -5,7 +5,7 @@ namespace Chimera\ServiceBus\Tactician\Tests;
 
 final class FetchById
 {
-    public function __construct(public int $id)
+    public function __construct(public readonly int $id)
     {
     }
 }

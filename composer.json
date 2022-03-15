@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": "^8.0",
-        "chimera/foundation": "^0.5.x-dev",
+        "php": "^8.1",
+        "chimera/foundation": "^1.0.x-dev",
         "league/tactician": "^1.1",
         "psr/container": "^2.0"
     },
@@ -26,7 +26,7 @@
         "phpunit/phpunit": "^9.5"
     },
     "provide": {
-        "chimera/bus-implementation": "0.5.0"
+        "chimera/bus-implementation": "1.0.0"
     },
     "autoload": {
         "psr-4": {
