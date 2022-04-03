@@ -8,7 +8,6 @@ use ComposerUnused\ComposerUnused\Configuration\NamedFilter;
 // @see https://github.com/composer-unused/composer-unused/issues/326
 
 return static fn(Configuration $config): Configuration => $config
-    ->addNamedFilter(NamedFilter::fromString('php'))
     ->addNamedFilter(NamedFilter::fromString('chimera/foundation'))
     ->addNamedFilter(NamedFilter::fromString('league/tactician'))
     ->addNamedFilter(NamedFilter::fromString('psr/container'));
