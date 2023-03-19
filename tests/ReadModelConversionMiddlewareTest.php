@@ -5,17 +5,13 @@ namespace Chimera\ServiceBus\Tactician\Tests;
 
 use Chimera\ServiceBus\ReadModelConverter;
 use Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 
-/** @coversDefaultClass \Chimera\ServiceBus\Tactician\ReadModelConversionMiddleware */
+#[PHPUnit\CoversClass(ReadModelConversionMiddleware::class)]
 final class ReadModelConversionMiddlewareTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::execute()
-     */
+    #[PHPUnit\Test]
     public function executeShouldProcessNextMiddlewareAndUseTheConverterToModifyTheResult(): void
     {
         $query     = new FetchById(1);
