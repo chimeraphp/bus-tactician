@@ -6,16 +6,17 @@ namespace Chimera\ServiceBus\Tactician\Tests;
 use Chimera\ServiceBus\Tactician\ServiceBus;
 use League\Tactician\CommandBus;
 use League\Tactician\Middleware;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 
 use function assert;
 
-/** @coversDefaultClass \Chimera\ServiceBus\Tactician\ServiceBus */
+#[PHPUnit\CoversClass(ServiceBus::class)]
 final class ServiceBusTest extends TestCase
 {
     private CommandBus $tacticianBus;
 
-    /** @before */
+    #[PHPUnit\Before]
     public function createBus(): void
     {
         $middleware = new class implements Middleware
@@ -32,12 +33,7 @@ final class ServiceBusTest extends TestCase
         $this->tacticianBus = new CommandBus([$middleware]);
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct()
-     * @covers ::handle()
-     */
+    #[PHPUnit\Test]
     public function handleShouldProcessTheMessageUsingTheDecoratedServiceAndReturnTheResult(): void
     {
         $bus = new ServiceBus($this->tacticianBus);

@@ -5,18 +5,14 @@ namespace Chimera\ServiceBus\Tactician\Tests;
 
 use Chimera\ServiceBus\Tactician\CommandHandler;
 use League\Tactician\Exception\MissingHandlerException;
+use PHPUnit\Framework\Attributes as PHPUnit;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-/** @coversDefaultClass \Chimera\ServiceBus\Tactician\CommandHandler */
+#[PHPUnit\CoversClass(CommandHandler::class)]
 final class CommandHandlerTest extends TestCase
 {
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::getHandlerForCommand
-     */
+    #[PHPUnit\Test]
     public function getHandlerForCommandShouldRaiseExceptionWhenNoHandlerWasRegistered(): void
     {
         $commandHandler = new CommandHandler(
@@ -28,14 +24,7 @@ final class CommandHandlerTest extends TestCase
         $commandHandler->getHandlerForCommand(FetchById::class);
     }
 
-    /**
-     * @test
-     *
-     * @covers ::__construct
-     * @covers ::execute
-     * @covers ::getHandlerForCommand
-     * @covers ::getMethodToCall
-     */
+    #[PHPUnit\Test]
     public function executeShouldCallTheRegisteredHandlerMethod(): void
     {
         $handler = new class {
