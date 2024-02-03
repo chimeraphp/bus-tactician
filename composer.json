@@ -23,7 +23,7 @@
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.1",
         "phpstan/phpstan-strict-rules": "^1.4",
-        "phpunit/phpunit": "^10.0.16"
+        "phpunit/phpunit": "^11.0.0"
     },
     "provide": {
         "chimera/bus-implementation": "1.0.0"
