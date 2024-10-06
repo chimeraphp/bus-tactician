@@ -10,13 +10,13 @@
         }
     ],
     "require": {
-        "php": "~8.1.0 || ~8.2.0",
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
         "chimera/foundation": "^1.0.x-dev",
         "league/tactician": "^1.1",
         "psr/container": "^2.0"
     },
     "require-dev": {
-        "infection/infection": "^0.26.19",
+        "infection/infection": "^0.29.0",
         "lcobucci/coding-standard": "^11.0",
         "phpstan/extension-installer": "^1.2",
         "phpstan/phpstan": "^1.8",
